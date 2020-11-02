@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 
 // Pages
@@ -28,24 +28,26 @@ class App extends Component {
     return (
       <Provider>
         <Layout style={{ height: "100vh" }}>
-          <Sider>
-            <div className="logo" />
-            <SiderMenu location={this.props.location} />
-          </Sider>
-          <Layout className="site-layout">
-            <Content style={{ margin: "15px" }}>
-              <div className="site-layout-background">
-                <Switch>
-                  <Route
-                    path="/workloads/cronjobs"
-                    exact
-                    component={CronjobsList}
-                  />
-                  <Route path="/workloads/pods" exact component={PodsList} />
-                </Switch>
-              </div>
-            </Content>
-          </Layout>
+          <Router>
+            <Sider>
+              <div className="logo" />
+              <SiderMenu location={this.props.location} />
+            </Sider>
+            <Layout className="site-layout">
+              <Content style={{ margin: "15px" }}>
+                <div className="site-layout-background">
+                  <Switch>
+                    <Route
+                      path="/workloads/cronjobs"
+                      exact
+                      component={CronjobsList}
+                    />
+                    <Route path="/workloads/pods" exact component={PodsList} />
+                  </Switch>
+                </div>
+              </Content>
+            </Layout>
+          </Router>
         </Layout>
       </Provider>
     );
