@@ -1,1 +1,1 @@
-# KubeSight
+# KubeSight Client
