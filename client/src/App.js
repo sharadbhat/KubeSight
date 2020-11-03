@@ -6,6 +6,7 @@ import { Layout } from "antd";
 import Workloads from "./pages/Workloads";
 
 // Components
+import Header from "./components/Header";
 import SiderMenu from "./components/SiderMenu";
 
 // Utils
@@ -35,6 +36,7 @@ class App extends Component {
             <Layout className="site-layout">
               <Content style={{ margin: "15px" }}>
                 <div className="site-layout-background">
+                  <Header />
                   <Switch>
                     {Workloads.map((props) => (
                       <Route {...props} />
