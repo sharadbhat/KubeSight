@@ -6,6 +6,9 @@ import { Menu } from "antd";
 // Components
 import NamespaceSelect from "./NamespaceSelect";
 
+// Utils
+import sideMenuConfig from "../utils/sideMenuConfig.json";
+
 class SiderMenu extends Component {
   constructor(props) {
     super(props);
@@ -18,25 +21,7 @@ class SiderMenu extends Component {
       chosenItemKey: `${path[1]}-${path[2]}`,
     };
 
-    this.menuItems = [
-      {
-        name: "workloads",
-        stylizedName: "Workloads",
-        path: "/workloads",
-        items: [
-          {
-            name: "cronjobs",
-            stylizedName: "Cron Jobs",
-            path: "/cronjobs",
-          },
-          {
-            name: "pods",
-            stylizedName: "Pods",
-            path: "/pods",
-          },
-        ],
-      },
-    ];
+    this.menuItems = sideMenuConfig;
   }
 
   componentDidMount = () => {
@@ -49,7 +34,7 @@ class SiderMenu extends Component {
       let subMenuItems = [];
       submenu.items.forEach((item, j) => {
         subMenuItems.push(
-          <Menu.Item key={`${submenu.name}-${item.name}`}>
+          <Menu.Item key={item.key}>
             <Link to={submenu.path + item.path}>{item.stylizedName}</Link>
           </Menu.Item>
         );
@@ -57,7 +42,7 @@ class SiderMenu extends Component {
 
       renderedMenu.push(
         <Menu.SubMenu
-          key={submenu.name}
+          key={submenu.key}
           title={
             <span style={{ fontWeight: 600 }}>{submenu.stylizedName}</span>
           }
