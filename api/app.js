@@ -4,8 +4,13 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var metaRouter = require("./routes/meta");
-var podsRouter = require("./routes/pods");
+// Utils
+var kube = require("./utils/kube");
+kube.initConn.then();
+
+// Routes
+var clusterRouter = require("./routes/cluster");
+var workloadRouter = require("./routes/workload");
 
 var app = express();
 
@@ -19,8 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/meta", metaRouter);
-app.use("/pods", podsRouter);
+app.use("/cluster", clusterRouter);
+app.use("/workload", workloadRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
