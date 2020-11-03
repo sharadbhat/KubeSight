@@ -1,0 +1,81 @@
+{
+  "": {
+    "name": "",
+    "stylizedName": "",
+    "key": ""
+  },
+
+  "/": {
+    "name": "",
+    "stylizedName": "",
+    "key": ""
+  },
+
+  "/cluster/namespaces": {
+    "name": "namespaces",
+    "stylizedName": "Namespaces",
+    "key": "cluster-namespaces",
+    "parentKey": "cluster"
+  },
+  "/cluster/nodes": {
+    "name": "nodes",
+    "stylizedName": "Nodes",
+    "key": "cluster-nodes",
+    "parentKey": "cluster"
+  },
+  "/cluster/persistentvolumes": {
+    "name": "persistentvolumes",
+    "stylizedName": "Persistent Volumes",
+    "key": "cluster-persistentvolumes",
+    "parentKey": "cluster"
+  },
+  "/cluster/roles": {
+    "name": "roles",
+    "stylizedName": "Roles",
+    "key": "cluster-roles",
+    "parentKey": "cluster"
+  },
+  "/cluster/storageclasses": {
+    "name": "storageclasses",
+    "stylizedName": "Storage Classes",
+    "key": "cluster-storageclasses",
+    "parentKey": "cluster"
+  },
+
+  "/workloads/cronjobs": {
+    "name": "cronjobs",
+    "stylizedName": "Cron Jobs",
+    "key": "workloads-cronjobs",
+    "parentKey": "workloads"
+  },
+  "/workloads/daemonsets": {
+    "name": "daemonsets",
+    "stylizedName": "Daemon Sets",
+    "key": "workloads-daemonsets",
+    "parentKey": "workloads"
+  },
+  "/workloads/deployments": {
+    "name": "deployments",
+    "stylizedName": "Deployments",
+    "key": "workloads-deployments",
+    "parentKey": "workloads"
+  },
+  "/workloads/jobs": {
+    "name": "jobs",
+    "stylizedName": "Jobs",
+    "key": "workloads-jobs",
+    "parentKey": "workloads"
+  },
+  "/workloads/pods": {
+    "name": "pods",
+    "stylizedName": "Pods",
+    "key": "workloads-pods",
+    "parentKey": "workloads"
+  },
+  "/workloads/replicasets": {
+    "name": "replicasets",
+    "stylizedName": "Replica Sets",
+    "key": "workloads-replicasets",
+    "parentKey": "workloads"
+  }
+}
