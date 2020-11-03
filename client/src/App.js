@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 
 // Pages
-import CronjobsList from "./pages/CronjobsList";
-import PodsList from "./pages/PodsList";
+import Workloads from "./pages/Workloads";
 
 // Components
 import SiderMenu from "./components/SiderMenu";
@@ -37,12 +36,9 @@ class App extends Component {
               <Content style={{ margin: "15px" }}>
                 <div className="site-layout-background">
                   <Switch>
-                    <Route
-                      path="/workloads/cronjobs"
-                      exact
-                      component={CronjobsList}
-                    />
-                    <Route path="/workloads/pods" exact component={PodsList} />
+                    {Workloads.map((props) => (
+                      <Route {...props} />
+                    ))}
                   </Switch>
                 </div>
               </Content>
