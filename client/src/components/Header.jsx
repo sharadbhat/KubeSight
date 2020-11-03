@@ -1,17 +1,14 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useContext } from "react";
 import { PageHeader } from "antd";
 
-import pathMap from "../utils/pathMap.json";
+// Utils
+import { Context } from "../utils/Context";
 
 const Header = () => {
-  let location = useLocation();
-
-  console.log(location.pathname);
-
+  const context = useContext(Context);
   return (
     <div>
-      <PageHeader title={pathMap[location.pathname].stylizedName} />
+      <PageHeader title={context.state.header} />
     </div>
   );
 };

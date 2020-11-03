@@ -6,9 +6,16 @@ class Provider extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      header: "",
       selectedNamespace: "",
     };
   }
+
+  setHeader = (header) => {
+    this.setState({
+      header,
+    });
+  };
 
   setNamespace = (namespace) => {
     this.setState({
@@ -19,7 +26,11 @@ class Provider extends Component {
   render() {
     return (
       <Context.Provider
-        value={{ state: this.state, setNamespace: this.setNamespace }}
+        value={{
+          state: this.state,
+          setHeader: this.setHeader,
+          setNamespace: this.setNamespace,
+        }}
       >
         {this.props.children}
       </Context.Provider>

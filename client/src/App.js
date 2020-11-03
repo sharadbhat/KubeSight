@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 
 // Pages
+import Cluster from "./pages/Cluster";
 import Workloads from "./pages/Workloads";
 
 // Components
@@ -38,6 +39,9 @@ class App extends Component {
                 <div className="site-layout-background">
                   <Header />
                   <Switch>
+                    {Cluster.map((props) => (
+                      <Route {...props} />
+                    ))}
                     {Workloads.map((props) => (
                       <Route {...props} />
                     ))}
