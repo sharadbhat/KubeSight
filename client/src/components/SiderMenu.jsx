@@ -7,7 +7,7 @@ import { Menu } from "antd";
 import NamespaceSelect from "./NamespaceSelect";
 
 // Utils
-import siderMenuConfig from "../utils/siderMenuConfig.json";
+import siderMenuConfig from "../utils/siderMenuConfig.js";
 import pathMap from "../utils/pathMap.json";
 
 class SiderMenu extends Component {
@@ -30,11 +30,15 @@ class SiderMenu extends Component {
     siderMenuConfig.forEach((submenu, i) => {
       let subMenuItems = [];
       submenu.items.forEach((item, j) => {
-        subMenuItems.push(
-          <Menu.Item key={item.key}>
-            <Link to={submenu.path + item.path}>{item.stylizedName}</Link>
-          </Menu.Item>
-        );
+        if (item.type === "item") {
+          subMenuItems.push(
+            <Menu.Item key={item.key}>
+              <Link to={submenu.path + item.path}>{item.stylizedName}</Link>
+            </Menu.Item>
+          );
+        } else if (item.type === "component") {
+          subMenuItems.push(item.component);
+        }
       });
 
       renderedMenu.push(
@@ -62,7 +66,6 @@ class SiderMenu extends Component {
         defaultSelectedKeys={[pathMap[this.path].key]}
         mode="inline"
       >
-        <NamespaceSelect />
         {this.state.renderedMenu}
       </Menu>
     );
