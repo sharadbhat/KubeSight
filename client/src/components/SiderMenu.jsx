@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Menu } from "antd";
 
@@ -85,5 +86,9 @@ class SiderMenu extends Component {
     );
   }
 }
+
+SiderMenu.propTypes = {
+  location: PropTypes.object.isRequired,
+};
 
 export default SiderMenu;
