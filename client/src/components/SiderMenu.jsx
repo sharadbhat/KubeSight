@@ -7,21 +7,18 @@ import { Menu } from "antd";
 import NamespaceSelect from "./NamespaceSelect";
 
 // Utils
-import sideMenuConfig from "../utils/sideMenuConfig.json";
+import siderMenuConfig from "../utils/siderMenuConfig.json";
+import pathMap from "../utils/pathMap.json";
 
 class SiderMenu extends Component {
   constructor(props) {
     super(props);
 
-    let path = props.location.pathname.split("/");
+    this.path = props.location.pathname;
 
     this.state = {
       renderedMenu: null,
-      chosenSubMenuKey: path[1],
-      chosenItemKey: `${path[1]}-${path[2]}`,
     };
-
-    this.menuItems = sideMenuConfig;
   }
 
   componentDidMount = () => {
@@ -30,7 +27,7 @@ class SiderMenu extends Component {
 
   renderMenu = () => {
     let renderedMenu = [];
-    this.menuItems.forEach((submenu, i) => {
+    siderMenuConfig.forEach((submenu, i) => {
       let subMenuItems = [];
       submenu.items.forEach((item, j) => {
         subMenuItems.push(
@@ -61,8 +58,8 @@ class SiderMenu extends Component {
     return (
       <Menu
         theme="dark"
-        defaultOpenKeys={[this.state.chosenSubMenuKey]}
-        defaultSelectedKeys={[this.state.chosenItemKey]}
+        defaultOpenKeys={[pathMap[this.path].parentKey]}
+        defaultSelectedKeys={[pathMap[this.path].key]}
         mode="inline"
       >
         <NamespaceSelect />

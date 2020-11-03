@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-class PodsList extends Component {
+class JobsList extends Component {
   render() {
     return <div></div>;
   }
 }
 
-export default PodsList;
+export default JobsList;
