@@ -56,7 +56,10 @@ let menuStructure = [
         type: "component",
         name: "namespace-select",
         key: "namespace-select",
-        component: <NamespaceSelect />,
+        props: {
+          key: "namespace-select",
+        },
+        component: NamespaceSelect,
       },
       {
         type: "item",
