@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Menu } from "antd";
 
-// Components
-import NamespaceSelect from "./NamespaceSelect";
-
 // Utils
 import siderMenuConfig from "../utils/siderMenuConfig.js";
 import pathMap from "../utils/pathMap.json";
@@ -37,7 +34,7 @@ class SiderMenu extends Component {
             </Menu.Item>
           );
         } else if (item.type === "component") {
-          subMenuItems.push(item.component);
+          subMenuItems.push(<item.component {...item.props} />);
         }
       });
 
