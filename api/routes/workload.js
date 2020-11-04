@@ -33,7 +33,7 @@ router.get("/:namespace/get-cron-jobs", async function (req, res, next) {
       response: {
         statusCode: 500,
         body: {
-          errorMessage: "Internal Server Error",
+          errorMessages: ["Internal Server Error"],
         },
       },
     });
@@ -65,7 +65,7 @@ router.get("/:namespace/get-daemon-sets", async function (req, res, next) {
       response: {
         statusCode: 500,
         body: {
-          errorMessage: "Internal Server Error",
+          errorMessages: ["Internal Server Error"],
         },
       },
     });
@@ -97,7 +97,7 @@ router.get("/:namespace/get-deployments", async function (req, res, next) {
       response: {
         statusCode: 500,
         body: {
-          errorMessage: "Internal Server Error",
+          errorMessages: ["Internal Server Error"],
         },
       },
     });
@@ -127,7 +127,7 @@ router.get("/:namespace/get-jobs", async function (req, res, next) {
       response: {
         statusCode: 500,
         body: {
-          errorMessage: "Internal Server Error",
+          errorMessages: ["Internal Server Error"],
         },
       },
     });
@@ -157,7 +157,7 @@ router.get("/:namespace/get-pods", async function (req, res, next) {
       response: {
         statusCode: 500,
         body: {
-          errorMessage: "Internal Server Error",
+          errorMessages: ["Internal Server Error"],
         },
       },
     });
@@ -189,7 +189,7 @@ router.get("/:namespace/get-replica-sets", async function (req, res, next) {
       response: {
         statusCode: 500,
         body: {
-          errorMessage: "Internal Server Error",
+          errorMessages: ["Internal Server Error"],
         },
       },
     });

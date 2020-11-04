@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Select, message } from "antd";
+import { Select, message, Tooltip } from "antd";
 
 // Utils
 import { Context } from "../utils/Context";
@@ -19,7 +19,9 @@ class NamespaceSelect extends Component {
 
   getAvailableNamespaces = async () => {
     try {
-      let serverResponse = await axios.get("/meta/get-namespaces");
+      let serverResponse = await axios.get(
+        "/cluster/get-namespaces?minimal=true"
+      );
       if (serverResponse.status === 200) {
         this.setState({
           namespaces: serverResponse.data.response.body.namespaces,
@@ -46,14 +48,16 @@ class NamespaceSelect extends Component {
           justifyContent: "center",
         }}
       >
-        <Select
-          style={{ margin: "15px 0px", width: 140 }}
-          onSelect={this.setNamespace}
-        >
-          {this.state.namespaces.map((namespace, i) => {
-            return <Select.Option key={namespace}>{namespace}</Select.Option>;
-          })}
-        </Select>
+        <Tooltip title="Namespace" placement="right">
+          <Select
+            style={{ margin: "15px 0px", width: 140 }}
+            onSelect={this.setNamespace}
+          >
+            {this.state.namespaces.map((namespace, i) => {
+              return <Select.Option key={namespace}>{namespace}</Select.Option>;
+            })}
+          </Select>
+        </Tooltip>
       </div>
     );
   }
