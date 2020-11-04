@@ -76,7 +76,7 @@ router.get("/get-nodes", async function (req, res, next) {
     let k8sResponse = await coreV1API.listNode();
     let nodes = [];
     k8sResponse.body.items.map((item, i) => {
-      nodes.push(item.metadata.name);
+      nodes.push(item);
     });
 
     res.status(200).json({
@@ -132,7 +132,7 @@ router.get("/get-cluster-roles", async function (req, res, next) {
     let k8sResponse = await rbacAuthorizationV1API.listRoleForAllNamespaces();
     let roles = [];
     k8sResponse.body.items.map((item, i) => {
-      roles.push(item.metadata.name);
+      roles.push(item);
     });
 
     res.status(200).json({
