@@ -104,7 +104,7 @@ router.get("/get-persistent-volumes", async function (req, res, next) {
     let k8sResponse = await coreV1API.listPersistentVolume();
     let persistentVolumes = [];
     k8sResponse.body.items.map((item, i) => {
-      persistentVolumes.push(item.metadata.name);
+      persistentVolumes.push(item);
     });
 
     res.status(200).json({
@@ -160,7 +160,7 @@ router.get("/get-storage-classes", async function (req, res, next) {
     let k8sResponse = await storageV1API.listStorageClass();
     let storageClasses = [];
     k8sResponse.body.items.map((item, i) => {
-      storageClasses.push(item.metadata.name);
+      storageClasses.push(item);
     });
 
     res.status(200).json({
