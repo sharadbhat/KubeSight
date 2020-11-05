@@ -15,7 +15,9 @@ class DataTable extends Component {
           columns={this.props.columns}
           dataSource={this.props.data}
           bordered
-          pagination={this.props.data.length < 11 ? false : true}
+          pagination={
+            this.props.data.length < 11 ? false : { position: ["bottomCenter"] }
+          }
         />
       </div>
     );
