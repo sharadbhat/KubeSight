@@ -135,6 +135,7 @@ class NodesList extends Component {
           <List
             dataSource={this.state.labels}
             bordered
+            style={{ maxHeight: 400, overflowY: "scroll" }}
             renderItem={(item) => {
               return <List.Item>{item}</List.Item>;
             }}
