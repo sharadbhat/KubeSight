@@ -27,7 +27,7 @@ let menuStructure = [
         name: "persistentvolumes",
         stylizedName: "Persistent Volumes",
         key: "cluster-persistentvolumes",
-        path: "/persistentvolumes",
+        path: "/persistent-volumes",
       },
       {
         type: "item",
@@ -41,7 +41,7 @@ let menuStructure = [
         name: "storageclasses",
         stylizedName: "Storage Classes",
         key: "cluster-storageclasses",
-        path: "/storageclasses",
+        path: "/storage-classes",
       },
     ],
   },

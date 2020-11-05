@@ -23,7 +23,7 @@
     "key": "cluster-nodes",
     "parentKey": "cluster"
   },
-  "/cluster/persistentvolumes": {
+  "/cluster/persistent-volumes": {
     "name": "persistentvolumes",
     "stylizedName": "Persistent Volumes",
     "key": "cluster-persistentvolumes",
@@ -35,7 +35,7 @@
     "key": "cluster-roles",
     "parentKey": "cluster"
   },
-  "/cluster/storageclasses": {
+  "/cluster/storage-classes": {
     "name": "storageclasses",
     "stylizedName": "Storage Classes",
     "key": "cluster-storageclasses",

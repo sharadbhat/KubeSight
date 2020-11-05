@@ -19,7 +19,7 @@ let routes = [
   },
   {
     key: "cluster-persistentvolumes",
-    path: "/cluster/persistentvolumes",
+    path: "/cluster/persistent-volumes",
     exact: true,
     component: PersistentVolumesList,
   },
@@ -31,7 +31,7 @@ let routes = [
   },
   {
     key: "cluster-storageclasses",
-    path: "/cluster/storageclasses",
+    path: "/cluster/storage-classes",
     exact: true,
     component: StorageClassesList,
   },
