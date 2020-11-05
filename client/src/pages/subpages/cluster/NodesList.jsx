@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { message, Tag, Tooltip, List, Button } from "antd";
+import { message, Tag, Tooltip, List, Button, Modal } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
@@ -9,7 +9,6 @@ import DataTable from "../../../components/DataTable";
 
 // Utils
 import { Context } from "../../../utils/Context";
-import Modal from "antd/lib/modal/Modal";
 
 class NodesList extends Component {
   constructor(props) {
@@ -121,8 +120,6 @@ class NodesList extends Component {
   };
 
   render() {
-    console.log(this.state.data);
-
     return (
       <div>
         <DataTable data={this.state.data} columns={this.columns} />
