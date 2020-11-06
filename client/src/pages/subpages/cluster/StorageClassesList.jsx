@@ -47,7 +47,7 @@ class StorageClassesList extends Component {
 
           if (parametersList.length > 0) {
             return (
-              <Collapse>
+              <Collapse key={uuid()}>
                 <Collapse.Panel header="View">
                   {parametersList.map((parameter) => {
                     return <Tag>{parameter}</Tag>;

@@ -3,7 +3,6 @@ import { message, Tag, Tooltip, Collapse, Popover, Descriptions } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
-import cronstrue from "cronstrue";
 
 // Components
 import DataTable from "../../../components/DataTable";
@@ -50,7 +49,7 @@ class JobsList extends Component {
 
           if (labelList.length > 0) {
             return (
-              <Collapse>
+              <Collapse key={uuid()}>
                 <Collapse.Panel header="View">
                   {labelList.map((label) => {
                     return <Tag>{label}</Tag>;
@@ -115,8 +114,6 @@ class JobsList extends Component {
         dataIndex: ["spec", "template", "spec", "containers"],
         key: uuid(),
         render: (containersList) => {
-          console.log(containersList);
-
           let imageList = [];
           containersList.forEach((container) => {
             imageList.push(container.image);
@@ -124,7 +121,7 @@ class JobsList extends Component {
 
           if (imageList.length > 0) {
             return (
-              <Collapse>
+              <Collapse key={uuid()}>
                 <Collapse.Panel header="View">
                   {imageList.map((image) => {
                     return <Tag>{image}</Tag>;

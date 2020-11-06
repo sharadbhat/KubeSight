@@ -51,7 +51,7 @@ class CronjobsList extends Component {
 
           if (labelList.length > 0) {
             return (
-              <Collapse>
+              <Collapse key={uuid()}>
                 <Collapse.Panel header="View">
                   {labelList.map((label) => {
                     return <Tag>{label}</Tag>;

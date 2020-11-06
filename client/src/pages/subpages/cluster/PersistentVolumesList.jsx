@@ -47,7 +47,7 @@ class PersistentVolumesList extends Component {
 
           if (capacityList.length > 0) {
             return (
-              <Collapse>
+              <Collapse key={uuid()}>
                 <Collapse.Panel header="View">
                   {capacityList.map((capacity) => {
                     return <Tag>{capacity}</Tag>;
@@ -66,7 +66,7 @@ class PersistentVolumesList extends Component {
         key: uuid(),
         render: (accessModesList) => {
           return (
-            <Collapse>
+            <Collapse key={uuid()}>
               <Collapse.Panel header="View">
                 {accessModesList.map((accessMode) => {
                   return <Tag>{accessMode}</Tag>;
