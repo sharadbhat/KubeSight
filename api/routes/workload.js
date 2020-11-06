@@ -16,7 +16,7 @@ router.get("/:namespace/get-cron-jobs", async function (req, res, next) {
     let cronJobs = [];
 
     k8sResponse.body.items.map((item, i) => {
-      cronJobs.push(item.metadata.name);
+      cronJobs.push(item);
     });
 
     res.status(200).json({
@@ -110,7 +110,7 @@ router.get("/:namespace/get-jobs", async function (req, res, next) {
     let jobs = [];
 
     k8sResponse.body.items.map((item, i) => {
-      jobs.push(item.metadata.name);
+      jobs.push(item);
     });
 
     res.status(200).json({
