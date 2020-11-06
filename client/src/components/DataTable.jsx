@@ -11,7 +11,7 @@ class DataTable extends Component {
     return (
       <div>
         <Table
-          scroll={{ y: "80vh" }}
+          scroll={{ y: "70vh" }}
           columns={this.props.columns}
           dataSource={this.props.data}
           bordered
