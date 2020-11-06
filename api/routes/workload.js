@@ -48,7 +48,7 @@ router.get("/:namespace/get-daemon-sets", async function (req, res, next) {
     let daemonSets = [];
 
     k8sResponse.body.items.map((item, i) => {
-      daemonSets.push(item.metadata.name);
+      daemonSets.push(item);
     });
 
     res.status(200).json({
@@ -80,7 +80,7 @@ router.get("/:namespace/get-deployments", async function (req, res, next) {
     let deployments = [];
 
     k8sResponse.body.items.map((item, i) => {
-      deployments.push(item.metadata.name);
+      deployments.push(item);
     });
 
     res.status(200).json({
@@ -140,7 +140,7 @@ router.get("/:namespace/get-pods", async function (req, res, next) {
     let pods = [];
 
     k8sResponse.body.items.map((item, i) => {
-      pods.push(item.metadata.name);
+      pods.push(item);
     });
 
     res.status(200).json({
@@ -172,7 +172,7 @@ router.get("/:namespace/get-replica-sets", async function (req, res, next) {
     let replicaSets = [];
 
     k8sResponse.body.items.map((item, i) => {
-      replicaSets.push(item.metadata.name);
+      replicaSets.push(item);
     });
 
     res.status(200).json({
