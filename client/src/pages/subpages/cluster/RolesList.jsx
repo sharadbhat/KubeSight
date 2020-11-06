@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { message, Tag, Tooltip } from "antd";
+import { message, Tooltip } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
@@ -38,7 +38,6 @@ class RolesList extends Component {
           return (
             <Tooltip
               title={moment(creationTimestamp).format("MMM D, YYYY, h:mm:ss A")}
-              placement="right"
             >
               {moment(creationTimestamp).fromNow()}
             </Tooltip>

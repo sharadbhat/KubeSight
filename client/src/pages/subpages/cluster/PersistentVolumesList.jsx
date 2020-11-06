@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { message, Tag, Tooltip, List, Button, Modal } from "antd";
+import { message, Tag, Tooltip, Collapse } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
@@ -20,6 +20,9 @@ class PersistentVolumesList extends Component {
 
     this.statusColors = {
       Available: "green",
+      Bound: "blue",
+      Released: "yellow",
+      Failed: "red",
     };
 
     this.columns = [
@@ -29,6 +32,49 @@ class PersistentVolumesList extends Component {
         key: uuid(),
         sorter: (a, b) => a.metadata.name.localeCompare(b.metadata.name),
         sortDirections: ["descend", "ascend"],
+      },
+      {
+        title: "Capacity",
+        dataIndex: ["spec", "capacity"],
+        key: uuid(),
+        render: (capacityObject) => {
+          let capacityList = [];
+          for (const capacity in capacityObject) {
+            if (capacityObject.hasOwnProperty(capacity)) {
+              capacityList.push(`${capacity}: ${capacityObject[capacity]}`);
+            }
+          }
+
+          if (capacityList.length > 0) {
+            return (
+              <Collapse>
+                <Collapse.Panel header="View">
+                  {capacityList.map((capacity) => {
+                    return <Tag>{capacity}</Tag>;
+                  })}
+                </Collapse.Panel>
+              </Collapse>
+            );
+          } else {
+            return "-";
+          }
+        },
+      },
+      {
+        title: "Access Modes",
+        dataIndex: ["spec", "accessModes"],
+        key: uuid(),
+        render: (accessModesList) => {
+          return (
+            <Collapse>
+              <Collapse.Panel header="View">
+                {accessModesList.map((accessMode) => {
+                  return <Tag>{accessMode}</Tag>;
+                })}
+              </Collapse.Panel>
+            </Collapse>
+          );
+        },
       },
       {
         title: "Reclaim Policy",
@@ -60,7 +106,6 @@ class PersistentVolumesList extends Component {
           return (
             <Tooltip
               title={moment(creationTimestamp).format("MMM D, YYYY, h:mm:ss A")}
-              placement="right"
             >
               {moment(creationTimestamp).fromNow()}
             </Tooltip>
