@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { message, Tag, Tooltip, List, Button, Modal } from "antd";
+import { message, Tag, Tooltip, Collapse } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
@@ -16,8 +16,6 @@ class StorageClassesList extends Component {
 
     this.state = {
       data: [],
-      parameters: [],
-      parametersModalVisible: false,
     };
 
     this.columns = [
@@ -46,18 +44,20 @@ class StorageClassesList extends Component {
               );
             }
           }
-          return (
-            <Button
-              onClick={() =>
-                this.setState({
-                  parameters: parametersList,
-                  parametersModalVisible: true,
-                })
-              }
-            >
-              View labels
-            </Button>
-          );
+
+          if (parametersList.length > 0) {
+            return (
+              <Collapse>
+                <Collapse.Panel header="View">
+                  {parametersList.map((parameter) => {
+                    return <Tag>{parameter}</Tag>;
+                  })}
+                </Collapse.Panel>
+              </Collapse>
+            );
+          } else {
+            return "-";
+          }
         },
       },
       {
@@ -72,7 +72,6 @@ class StorageClassesList extends Component {
           return (
             <Tooltip
               title={moment(creationTimestamp).format("MMM D, YYYY, h:mm:ss A")}
-              placement="right"
             >
               {moment(creationTimestamp).fromNow()}
             </Tooltip>
@@ -82,7 +81,8 @@ class StorageClassesList extends Component {
     ];
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
+    this.context.setHeader("Storage Classes");
     this.getStorageClasses();
   };
 
@@ -103,29 +103,10 @@ class StorageClassesList extends Component {
     }
   };
 
-  componentDidMount = () => {
-    this.context.setHeader("Storage Classes");
-  };
-
   render() {
     return (
       <div>
         <DataTable data={this.state.data} columns={this.columns} />
-        <Modal
-          title="Parameters"
-          visible={this.state.parametersModalVisible}
-          onCancel={() => this.setState({ parametersModalVisible: false })}
-          footer={null}
-        >
-          <List
-            dataSource={this.state.parameters}
-            bordered
-            style={{ maxHeight: 400, overflowY: "scroll" }}
-            renderItem={(item) => {
-              return <List.Item>{item}</List.Item>;
-            }}
-          />
-        </Modal>
       </div>
     );
   }

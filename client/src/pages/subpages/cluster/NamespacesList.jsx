@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { message, Tag, Tooltip, List, Button, Modal } from "antd";
+import { message, Tag, Tooltip, Collapse } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
@@ -16,8 +16,6 @@ class NamespacesList extends Component {
 
     this.state = {
       data: [],
-      labels: [],
-      labelsModalVisible: false,
     };
 
     this.phaseColors = {
@@ -44,18 +42,20 @@ class NamespacesList extends Component {
               labelList.push(`${label}: ${labelObject[label]}`);
             }
           }
-          return (
-            <Button
-              onClick={() =>
-                this.setState({
-                  labels: labelList,
-                  labelsModalVisible: true,
-                })
-              }
-            >
-              View labels
-            </Button>
-          );
+
+          if (labelList.length > 0) {
+            return (
+              <Collapse>
+                <Collapse.Panel header="View">
+                  {labelList.map((label) => {
+                    return <Tag>{label}</Tag>;
+                  })}
+                </Collapse.Panel>
+              </Collapse>
+            );
+          } else {
+            return "-";
+          }
         },
       },
       {
@@ -78,7 +78,6 @@ class NamespacesList extends Component {
           return (
             <Tooltip
               title={moment(creationTimestamp).format("MMM D, YYYY, h:mm:ss A")}
-              placement="right"
             >
               {moment(creationTimestamp).fromNow()}
             </Tooltip>
@@ -114,21 +113,6 @@ class NamespacesList extends Component {
     return (
       <div>
         <DataTable data={this.state.data} columns={this.columns} />
-        <Modal
-          title="Labels"
-          visible={this.state.labelsModalVisible}
-          onCancel={() => this.setState({ labelsModalVisible: false })}
-          footer={null}
-        >
-          <List
-            dataSource={this.state.labels}
-            bordered
-            style={{ maxHeight: 400, overflowY: "scroll" }}
-            renderItem={(item) => {
-              return <List.Item>{item}</List.Item>;
-            }}
-          />
-        </Modal>
       </div>
     );
   }
