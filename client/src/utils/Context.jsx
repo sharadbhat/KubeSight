@@ -7,7 +7,7 @@ class Provider extends Component {
     super(props);
     this.state = {
       header: "",
-      selectedNamespace: "",
+      namespace: "",
     };
   }
 
@@ -19,7 +19,7 @@ class Provider extends Component {
 
   setNamespace = (namespace) => {
     this.setState({
-      selectedNamespace: namespace,
+      namespace,
     });
   };
 
