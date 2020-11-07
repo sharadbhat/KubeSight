@@ -1,3 +1,4 @@
+import Overview from "./subpages/cluster/Overview";
 import NamespacesList from "./subpages/cluster/NamespacesList";
 import NodesList from "./subpages/cluster/NodesList";
 import PersistentVolumesList from "./subpages/cluster/PersistentVolumesList";
@@ -5,6 +6,12 @@ import RolesList from "./subpages/cluster/RolesList";
 import StorageClassesList from "./subpages/cluster/StorageClassesList";
 
 let routes = [
+  {
+    key: "cluster-overview",
+    path: "/cluster/overview",
+    exact: true,
+    component: Overview,
+  },
   {
     key: "cluster-namespaces",
     path: "/cluster/namespaces",

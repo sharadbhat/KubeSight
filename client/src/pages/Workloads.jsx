@@ -1,3 +1,4 @@
+import Overview from "./subpages/workloads/Overview";
 import CronjobsList from "./subpages/workloads/CronjobsList";
 import DaemonsetsList from "./subpages/workloads/DaemonsetsList";
 import DeploymentsList from "./subpages/workloads/DeploymentsList";
@@ -6,6 +7,12 @@ import PodsList from "./subpages/workloads/PodsList";
 import ReplicasetsList from "./subpages/workloads/ReplicasetsList";
 
 let routes = [
+  {
+    key: "workloads-overview",
+    path: "/workloads/overview",
+    exact: true,
+    component: Overview,
+  },
   {
     key: "workloads-cronjobs",
     path: "/workloads/cronjobs",
