@@ -10,6 +10,13 @@ let menuStructure = [
     items: [
       {
         type: "item",
+        name: "overview",
+        stylizedName: "Overview",
+        key: "cluster-overview",
+        path: "/overview",
+      },
+      {
+        type: "item",
         name: "namespaces",
         stylizedName: "Namespaces",
         key: "cluster-namespaces",
@@ -60,6 +67,13 @@ let menuStructure = [
           key: "namespace-select",
         },
         component: NamespaceSelect,
+      },
+      {
+        type: "item",
+        name: "overview",
+        stylizedName: "Overview",
+        key: "workloads-overview",
+        path: "/overview",
       },
       {
         type: "item",

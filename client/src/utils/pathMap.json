@@ -11,6 +11,12 @@
     "key": ""
   },
 
+  "/cluster/overview": {
+    "name": "overview",
+    "stylizedName": "Overview",
+    "key": "cluster-overview",
+    "parentKey": "cluster"
+  },
   "/cluster/namespaces": {
     "name": "namespaces",
     "stylizedName": "Namespaces",
@@ -42,6 +48,12 @@
     "parentKey": "cluster"
   },
 
+  "/workloads/overview": {
+    "name": "overview",
+    "stylizedName": "Overview",
+    "key": "workloads-overview",
+    "parentKey": "workloads"
+  },
   "/workloads/cronjobs": {
     "name": "cronjobs",
     "stylizedName": "Cron Jobs",
