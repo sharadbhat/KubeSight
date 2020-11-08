@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { message, Tag, Tooltip, Collapse, Popover, Descriptions } from "antd";
+import { message, Tag, Tooltip, Collapse } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { v4 as uuid } from "uuid";

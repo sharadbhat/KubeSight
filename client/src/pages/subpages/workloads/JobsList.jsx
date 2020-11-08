@@ -16,10 +16,6 @@ class JobsList extends Component {
 
     this.state = {
       data: [],
-      labels: [],
-      labelsModalVisible: false,
-      images: [],
-      imagesModalVisible: false,
     };
 
     this.columns = [

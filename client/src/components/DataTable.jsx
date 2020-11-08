@@ -3,10 +3,6 @@ import { PropTypes } from "prop-types";
 import { Table } from "antd";
 
 class DataTable extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>
