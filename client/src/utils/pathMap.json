@@ -11,12 +11,6 @@
     "key": ""
   },
 
-  "/cluster/overview": {
-    "name": "overview",
-    "stylizedName": "Overview",
-    "key": "cluster-overview",
-    "parentKey": "cluster"
-  },
   "/cluster/namespaces": {
     "name": "namespaces",
     "stylizedName": "Namespaces",

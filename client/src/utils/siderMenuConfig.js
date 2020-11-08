@@ -10,13 +10,6 @@ let menuStructure = [
     items: [
       {
         type: "item",
-        name: "overview",
-        stylizedName: "Overview",
-        key: "cluster-overview",
-        path: "/overview",
-      },
-      {
-        type: "item",
         name: "namespaces",
         stylizedName: "Namespaces",
         key: "cluster-namespaces",
