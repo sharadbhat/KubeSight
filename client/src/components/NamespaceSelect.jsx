@@ -52,6 +52,7 @@ class NamespaceSelect extends Component {
           <Select
             style={{ margin: "15px 0px", width: 140 }}
             onSelect={this.setNamespace}
+            value={this.context.state.namespace}
           >
             {this.state.namespaces.map((namespace, i) => {
               return <Select.Option key={namespace}>{namespace}</Select.Option>;
