@@ -48,13 +48,13 @@
     "key": "workloads-overview",
     "parentKey": "workloads"
   },
-  "/workloads/cronjobs": {
+  "/workloads/cron-jobs": {
     "name": "cronjobs",
     "stylizedName": "Cron Jobs",
     "key": "workloads-cronjobs",
     "parentKey": "workloads"
   },
-  "/workloads/daemonsets": {
+  "/workloads/daemon-sets": {
     "name": "daemonsets",
     "stylizedName": "Daemon Sets",
     "key": "workloads-daemonsets",
@@ -78,10 +78,29 @@
     "key": "workloads-pods",
     "parentKey": "workloads"
   },
-  "/workloads/replicasets": {
+  "/workloads/replica-sets": {
     "name": "replicasets",
     "stylizedName": "Replica Sets",
     "key": "workloads-replicasets",
     "parentKey": "workloads"
+  },
+
+  "/config/config-maps": {
+    "name": "configmaps",
+    "stylizedName": "Config Maps",
+    "key": "config-configmaps",
+    "parentKey": "config"
+  },
+  "/config/persistent-volume-claims": {
+    "name": "pvc",
+    "stylizedName": "PV Claims",
+    "key": "config-pvc",
+    "parentKey": "config"
+  },
+  "/config/secrets": {
+    "name": "secrets",
+    "stylizedName": "Secrets",
+    "key": "config-secrets",
+    "parentKey": "config"
   }
 }

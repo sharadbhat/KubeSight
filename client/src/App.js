@@ -5,6 +5,7 @@ import { Layout } from "antd";
 // Pages
 import Cluster from "./pages/Cluster";
 import Workloads from "./pages/Workloads";
+import Config from "./pages/Config";
 
 // Components
 import Header from "./components/Header";
@@ -43,6 +44,9 @@ class App extends Component {
                       <Route {...props} />
                     ))}
                     {Workloads.map((props) => (
+                      <Route {...props} />
+                    ))}
+                    {Config.map((props) => (
                       <Route {...props} />
                     ))}
                   </Switch>

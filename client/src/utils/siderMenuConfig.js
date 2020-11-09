@@ -46,21 +46,21 @@ let menuStructure = [
     ],
   },
   {
+    type: "component",
+    name: "namespace-select",
+    key: "namespace-select",
+    props: {
+      key: "namespace-select",
+    },
+    component: NamespaceSelect,
+  },
+  {
     type: "submenu",
     name: "workloads",
     stylizedName: "Workloads",
     key: "workloads",
     path: "/workloads",
     items: [
-      {
-        type: "component",
-        name: "namespace-select",
-        key: "namespace-select",
-        props: {
-          key: "namespace-select",
-        },
-        component: NamespaceSelect,
-      },
       {
         type: "item",
         name: "overview",
@@ -73,14 +73,14 @@ let menuStructure = [
         name: "cronjobs",
         stylizedName: "Cron Jobs",
         key: "workloads-cronjobs",
-        path: "/cronjobs",
+        path: "/cron-jobs",
       },
       {
         type: "item",
         name: "daemonsets",
         stylizedName: "Daemon Sets",
         key: "workloads-daemonsets",
-        path: "/daemonsets",
+        path: "/daemon-sets",
       },
       {
         type: "item",
@@ -108,7 +108,37 @@ let menuStructure = [
         name: "replicasets",
         stylizedName: "Replica Sets",
         key: "workloads-replicasets",
-        path: "/replicasets",
+        path: "/replica-sets",
+      },
+    ],
+  },
+  {
+    type: "submenu",
+    name: "config",
+    stylizedName: "Config and Storage",
+    key: "config",
+    path: "/config",
+    items: [
+      {
+        type: "item",
+        name: "configmaps",
+        stylizedName: "Config Maps",
+        key: "config-configmaps",
+        path: "/config-maps",
+      },
+      {
+        type: "item",
+        name: "pvc",
+        stylizedName: "PV Claims",
+        key: "config-pvc",
+        path: "/persistent-volume-claims",
+      },
+      {
+        type: "item",
+        name: "secrets",
+        stylizedName: "Secrets",
+        key: "config-secrets",
+        path: "/secrets",
       },
     ],
   },
