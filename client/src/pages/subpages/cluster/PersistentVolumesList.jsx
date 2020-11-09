@@ -122,7 +122,9 @@ class PersistentVolumesList extends Component {
 
   getPersistentVolumes = async () => {
     try {
-      let serverResponse = await axios.get("/cluster/get-persistent-volumes");
+      let serverResponse = await axios.get(
+        "/api/cluster/get-persistent-volumes"
+      );
       if (serverResponse.status === 200) {
         this.setState({
           data: serverResponse.data.response.body.persistentVolumes,

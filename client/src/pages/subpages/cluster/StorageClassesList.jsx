@@ -88,7 +88,7 @@ class StorageClassesList extends Component {
 
   getStorageClasses = async () => {
     try {
-      let serverResponse = await axios.get("/cluster/get-storage-classes");
+      let serverResponse = await axios.get("/api/cluster/get-storage-classes");
       if (serverResponse.status === 200) {
         this.setState({
           data: serverResponse.data.response.body.storageClasses,

@@ -25,29 +25,33 @@ class SiderMenu extends Component {
   renderMenu = () => {
     let renderedMenu = [];
     siderMenuConfig.forEach((submenu, i) => {
-      let subMenuItems = [];
-      submenu.items.forEach((item, j) => {
-        if (item.type === "item") {
-          subMenuItems.push(
-            <Menu.Item key={item.key}>
-              <Link to={submenu.path + item.path}>{item.stylizedName}</Link>
-            </Menu.Item>
-          );
-        } else if (item.type === "component") {
-          subMenuItems.push(<item.component {...item.props} />);
-        }
-      });
-
-      renderedMenu.push(
-        <Menu.SubMenu
-          key={submenu.key}
-          title={
-            <span style={{ fontWeight: 600 }}>{submenu.stylizedName}</span>
+      if (submenu.type === "component") {
+        renderedMenu.push(<submenu.component {...submenu.props} />);
+      } else {
+        let subMenuItems = [];
+        submenu.items.forEach((item, j) => {
+          if (item.type === "item") {
+            subMenuItems.push(
+              <Menu.Item key={item.key}>
+                <Link to={submenu.path + item.path}>{item.stylizedName}</Link>
+              </Menu.Item>
+            );
+          } else if (item.type === "component") {
+            subMenuItems.push(<item.component {...item.props} />);
           }
-        >
-          {subMenuItems}
-        </Menu.SubMenu>
-      );
+        });
+
+        renderedMenu.push(
+          <Menu.SubMenu
+            key={submenu.key}
+            title={
+              <span style={{ fontWeight: 600 }}>{submenu.stylizedName}</span>
+            }
+          >
+            {subMenuItems}
+          </Menu.SubMenu>
+        );
+      }
     });
 
     this.setState({

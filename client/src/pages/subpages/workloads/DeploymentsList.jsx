@@ -107,7 +107,7 @@ class DeploymentsList extends Component {
   getDeployments = async () => {
     try {
       let serverResponse = await axios.get(
-        `/workload/${this.context.state.namespace}/get-deployments`
+        `/api/workload/${this.context.state.namespace}/get-deployments`
       );
       if (serverResponse.status === 200) {
         this.setState({

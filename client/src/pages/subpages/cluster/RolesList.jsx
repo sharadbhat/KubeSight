@@ -54,7 +54,7 @@ class RolesList extends Component {
 
   getRoles = async () => {
     try {
-      let serverResponse = await axios.get("/cluster/get-cluster-roles");
+      let serverResponse = await axios.get("/api/cluster/get-cluster-roles");
       if (serverResponse.status === 200) {
         this.setState({
           data: serverResponse.data.response.body.roles,

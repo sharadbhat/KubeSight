@@ -20,7 +20,7 @@ class NamespaceSelect extends Component {
   getAvailableNamespaces = async () => {
     try {
       let serverResponse = await axios.get(
-        "/cluster/get-namespaces?minimal=true"
+        "/api/cluster/get-namespaces?minimal=true"
       );
       if (serverResponse.status === 200) {
         this.setState({

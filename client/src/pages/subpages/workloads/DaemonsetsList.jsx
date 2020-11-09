@@ -107,7 +107,7 @@ class DaemonsetsList extends Component {
   getDaemonSets = async () => {
     try {
       let serverResponse = await axios.get(
-        `/workload/${this.context.state.namespace}/get-daemon-sets`
+        `/api/workload/${this.context.state.namespace}/get-daemon-sets`
       );
       if (serverResponse.status === 200) {
         this.setState({

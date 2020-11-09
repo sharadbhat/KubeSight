@@ -137,7 +137,7 @@ class CronjobsList extends Component {
   getCronJobs = async () => {
     try {
       let serverResponse = await axios.get(
-        `/workload/${this.context.state.namespace}/get-cron-jobs`
+        `/api/workload/${this.context.state.namespace}/get-cron-jobs`
       );
       if (serverResponse.status === 200) {
         this.setState({

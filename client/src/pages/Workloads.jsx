@@ -15,13 +15,13 @@ let routes = [
   },
   {
     key: "workloads-cronjobs",
-    path: "/workloads/cronjobs",
+    path: "/workloads/cron-jobs",
     exact: true,
     component: CronjobsList,
   },
   {
     key: "workloads-daemonsets",
-    path: "/workloads/daemonsets",
+    path: "/workloads/daemon-sets",
     exact: true,
     component: DaemonsetsList,
   },
@@ -45,7 +45,7 @@ let routes = [
   },
   {
     key: "workloads-replicasets",
-    path: "/workloads/replicasets",
+    path: "/workloads/replica-sets",
     exact: true,
     component: ReplicasetsList,
   },

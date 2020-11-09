@@ -141,7 +141,7 @@ class JobsList extends Component {
   getJobs = async () => {
     try {
       let serverResponse = await axios.get(
-        `/workload/${this.context.state.namespace}/get-jobs`
+        `/api/workload/${this.context.state.namespace}/get-jobs`
       );
       if (serverResponse.status === 200) {
         this.setState({

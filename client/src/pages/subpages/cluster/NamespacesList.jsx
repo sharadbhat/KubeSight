@@ -94,7 +94,7 @@ class NamespacesList extends Component {
 
   getNamespaces = async () => {
     try {
-      let serverResponse = await axios.get("/cluster/get-namespaces");
+      let serverResponse = await axios.get("/api/cluster/get-namespaces");
       if (serverResponse.status === 200) {
         this.setState({
           data: serverResponse.data.response.body.namespaces,

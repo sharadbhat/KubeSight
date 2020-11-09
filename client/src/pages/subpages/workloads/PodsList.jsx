@@ -108,7 +108,7 @@ class PodsList extends Component {
   getPods = async () => {
     try {
       let serverResponse = await axios.get(
-        `/workload/${this.context.state.namespace}/get-pods`
+        `/api/workload/${this.context.state.namespace}/get-pods`
       );
       if (serverResponse.status === 200) {
         this.setState({

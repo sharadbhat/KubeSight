@@ -11,6 +11,7 @@ kube.initConn.then();
 // Routes
 var clusterRouter = require("./routes/cluster");
 var workloadRouter = require("./routes/workload");
+var configRouter = require("./routes/config");
 
 var app = express();
 
@@ -24,8 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/cluster", clusterRouter);
-app.use("/workload", workloadRouter);
+app.use("/api/cluster", clusterRouter);
+app.use("/api/workload", workloadRouter);
+app.use("/api/config", configRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

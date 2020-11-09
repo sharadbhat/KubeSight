@@ -103,7 +103,7 @@ class NodesList extends Component {
 
   getNodes = async () => {
     try {
-      let serverResponse = await axios.get("/cluster/get-nodes");
+      let serverResponse = await axios.get("/api/cluster/get-nodes");
       if (serverResponse.status === 200) {
         this.setState({
           data: serverResponse.data.response.body.nodes,

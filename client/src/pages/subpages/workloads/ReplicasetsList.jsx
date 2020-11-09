@@ -107,7 +107,7 @@ class ReplicasetsList extends Component {
   getReplicaSets = async () => {
     try {
       let serverResponse = await axios.get(
-        `/workload/${this.context.state.namespace}/get-replica-sets`
+        `/api/workload/${this.context.state.namespace}/get-replica-sets`
       );
       if (serverResponse.status === 200) {
         this.setState({
