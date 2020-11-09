@@ -7,7 +7,7 @@ class Provider extends Component {
     super(props);
     this.state = {
       header: "",
-      namespace: "",
+      namespace: "default",
     };
   }
 
