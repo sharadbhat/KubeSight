@@ -22,7 +22,7 @@ class PersistentVolumesList extends Component {
     this.statusColors = {
       Available: "green",
       Bound: "blue",
-      Released: "yellow",
+      Released: "orange",
       Failed: "red",
     };
 
@@ -88,6 +88,18 @@ class PersistentVolumesList extends Component {
         key: uuid(),
         render: (status) => {
           return <Tag color={this.statusColors[status]}>{status}</Tag>;
+        },
+      },
+      {
+        title: "Claim",
+        dataIndex: ["spec", "claimRef", "name"],
+        key: uuid(),
+        render: (claim) => {
+          if (claim) {
+            return claim;
+          } else {
+            return "-";
+          }
         },
       },
       {
