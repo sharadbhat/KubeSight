@@ -46,6 +46,11 @@ class Overview extends Component {
           ready: 0,
           total: 0,
         },
+        replicationControllers: {
+          pending: 0,
+          ready: 0,
+          total: 0,
+        },
         statefulSets: {
           pending: 0,
           ready: 0,
@@ -288,6 +293,33 @@ class Overview extends Component {
               />
               <p style={{ textAlign: "center", fontWeight: 600 }}>
                 Stateful Sets
+              </p>
+            </div>
+          )}
+          {this.state.data.replicationControllers.total > 0 && (
+            <div>
+              <PieChart
+                style={{ height: "20vh" }}
+                label={({ dataEntry }) => {
+                  if (dataEntry.value > 0) {
+                    return `${Math.round(dataEntry.percentage)}%`;
+                  }
+                }}
+                data={[
+                  {
+                    title: "Running",
+                    value: this.state.data.replicationControllers.ready,
+                    color: "#90ee90",
+                  },
+                  {
+                    title: "Pending",
+                    value: this.state.data.replicationControllers.pending,
+                    color: "yellow",
+                  },
+                ]}
+              />
+              <p style={{ textAlign: "center", fontWeight: 600 }}>
+                Replication Controllers
               </p>
             </div>
           )}

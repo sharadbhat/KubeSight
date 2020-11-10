@@ -19,6 +19,9 @@ router.get("/:namespace/get-overview", async function (req, res, next) {
     let podStats = await stats.podStats(req.params.namespace);
     let replicaSetStats = await stats.replicaSetStats(req.params.namespace);
     let statefulSetStats = await stats.statefulSetStats(req.params.namespace);
+    let replicationControllerStats = await stats.replicationControllerStats(
+      req.params.namespace
+    );
 
     res.status(200).json({
       response: {
@@ -31,6 +34,7 @@ router.get("/:namespace/get-overview", async function (req, res, next) {
           pods: podStats,
           replicaSets: replicaSetStats,
           statefulSets: statefulSetStats,
+          replicationControllers: replicationControllerStats,
         },
       },
     });

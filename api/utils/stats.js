@@ -156,6 +156,31 @@ async function replicaSetStats(namespace) {
   };
 }
 
+async function replicationControllerStats(namespace) {
+  let pendingReplicationControllers = 0;
+  let readyReplicationControllers = 0;
+  let totalReplicationControllers = 0;
+
+  let statefulSetsResponse = await coreV1API.listNamespacedReplicationController(
+    namespace
+  );
+
+  statefulSetsResponse.body.items.forEach((item) => {
+    totalReplicationControllers += 1;
+    if (item.spec.replicas === item.status.readyReplicas) {
+      readyReplicationControllers += 1;
+    } else {
+      pendingReplicationControllers += 1;
+    }
+  });
+
+  return {
+    ready: readyReplicationControllers,
+    pending: pendingReplicationControllers,
+    total: totalReplicationControllers,
+  };
+}
+
 async function statefulSetStats(namespace) {
   let pendingStatefulSets = 0;
   let readyStatefulSets = 0;
@@ -188,5 +213,6 @@ module.exports = {
   jobStats,
   podStats,
   replicaSetStats,
+  replicationControllerStats,
   statefulSetStats,
 };
