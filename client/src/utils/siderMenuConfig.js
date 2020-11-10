@@ -112,6 +112,13 @@ let menuStructure = [
       },
       {
         type: "item",
+        name: "replicationcontrollers",
+        stylizedName: "Replication Controllers",
+        key: "workloads-replicationcontrollers",
+        path: "/replication-controllers",
+      },
+      {
+        type: "item",
         name: "statefulsets",
         stylizedName: "Stateful Sets",
         key: "workloads-statefulsets",

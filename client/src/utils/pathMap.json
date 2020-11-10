@@ -84,6 +84,12 @@
     "key": "workloads-replicasets",
     "parentKey": "workloads"
   },
+  "/workloads/replication-controllers": {
+    "name": "replicationcontrollers",
+    "stylizedName": "Replication Controllers",
+    "key": "workloads-replicationcontrollers",
+    "parentKey": "workloads"
+  },
   "/workloads/stateful-sets": {
     "name": "statefulsets",
     "stylizedName": "Stateful Sets",

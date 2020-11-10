@@ -5,6 +5,7 @@ import DeploymentsList from "./subpages/workloads/DeploymentsList";
 import JobsList from "./subpages/workloads/JobsList";
 import PodsList from "./subpages/workloads/PodsList";
 import ReplicasetsList from "./subpages/workloads/ReplicasetsList";
+import ReplicationcontrollersList from "./subpages/workloads/ReplicationcontrollersList";
 import StatefulsetsList from "./subpages/workloads/StatefulsetsList";
 
 let routes = [
@@ -49,6 +50,12 @@ let routes = [
     path: "/workloads/replica-sets",
     exact: true,
     component: ReplicasetsList,
+  },
+  {
+    key: "workloads-replicationcontrollers",
+    path: "/workloads/replication-controllers",
+    exact: true,
+    component: ReplicationcontrollersList,
   },
   {
     key: "workloads-statefulsets",
