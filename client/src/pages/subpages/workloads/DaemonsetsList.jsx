@@ -15,6 +15,7 @@ class DaemonsetsList extends Component {
     super(props);
 
     this.state = {
+      loading: true,
       data: [],
     };
 
@@ -121,12 +122,19 @@ class DaemonsetsList extends Component {
       console.log("Error: ", err);
       message.error("Error occurred");
     }
+    this.setState({
+      loading: false,
+    });
   };
 
   render() {
     return (
       <div>
-        <DataTable data={this.state.data} columns={this.columns} />
+        <DataTable
+          loading={this.state.loading}
+          data={this.state.data}
+          columns={this.columns}
+        />
       </div>
     );
   }

@@ -8,6 +8,7 @@ class DataTable extends Component {
     return (
       <div>
         <Table
+          loading={this.props.loading}
           scroll={{ y: "70vh" }}
           columns={this.props.columns}
           dataSource={this.props.data}
@@ -23,6 +24,7 @@ class DataTable extends Component {
 }
 
 DataTable.propTypes = {
+  loading: PropTypes.bool.isRequired,
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
 };
