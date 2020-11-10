@@ -31,7 +31,7 @@ class App extends Component {
       <Provider>
         <Layout style={{ height: "100vh" }}>
           <Router>
-            <Sider>
+            <Sider width={"14vw"}>
               <div className="logo" />
               <SiderMenu location={this.props.location} />
             </Sider>
