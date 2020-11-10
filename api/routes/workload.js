@@ -18,6 +18,7 @@ router.get("/:namespace/get-overview", async function (req, res, next) {
     let jobStats = await stats.jobStats(req.params.namespace);
     let podStats = await stats.podStats(req.params.namespace);
     let replicaSetStats = await stats.replicaSetStats(req.params.namespace);
+    let statefulSetStats = await stats.statefulSetStats(req.params.namespace);
 
     res.status(200).json({
       response: {
@@ -29,6 +30,7 @@ router.get("/:namespace/get-overview", async function (req, res, next) {
           jobs: jobStats,
           pods: podStats,
           replicaSets: replicaSetStats,
+          statefulSets: statefulSetStats,
         },
       },
     });
@@ -217,6 +219,38 @@ router.get("/:namespace/get-replica-sets", async function (req, res, next) {
         body: {
           namespace: req.params.namespace,
           replicaSets,
+        },
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      response: {
+        statusCode: 500,
+        body: {
+          errorMessages: ["Internal Server Error"],
+        },
+      },
+    });
+  }
+});
+
+router.get("/:namespace/get-stateful-sets", async function (req, res, next) {
+  try {
+    let k8sResponse = await appsV1API.listNamespacedStatefulSet(
+      req.params.namespace
+    );
+    let statefulSets = [];
+
+    k8sResponse.body.items.map((item, i) => {
+      statefulSets.push(item);
+    });
+
+    res.status(200).json({
+      response: {
+        statusCode: 200,
+        body: {
+          namespace: req.params.namespace,
+          statefulSets,
         },
       },
     });

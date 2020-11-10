@@ -156,6 +156,31 @@ async function replicaSetStats(namespace) {
   };
 }
 
+async function statefulSetStats(namespace) {
+  let pendingStatefulSets = 0;
+  let readyStatefulSets = 0;
+  let totalStatefulSets = 0;
+
+  let statefulSetsResponse = await appsV1API.listNamespacedStatefulSet(
+    namespace
+  );
+
+  statefulSetsResponse.body.items.forEach((item) => {
+    totalStatefulSets += 1;
+    if (item.spec.replicas === item.status.readyReplicas) {
+      readyStatefulSets += 1;
+    } else {
+      pendingStatefulSets += 1;
+    }
+  });
+
+  return {
+    ready: readyStatefulSets,
+    pending: pendingStatefulSets,
+    total: totalStatefulSets,
+  };
+}
+
 module.exports = {
   cronJobStats,
   daemonSetStats,
@@ -163,4 +188,5 @@ module.exports = {
   jobStats,
   podStats,
   replicaSetStats,
+  statefulSetStats,
 };

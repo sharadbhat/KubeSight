@@ -10,18 +10,13 @@ import DataTable from "../../../components/DataTable";
 // Utils
 import { Context } from "../../../utils/Context";
 
-class PVC extends Component {
+class StatefulsetsList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       loading: true,
       data: [],
-    };
-
-    this.statusColors = {
-      Pending: "orange",
-      Bound: "green",
     };
 
     this.columns = [
@@ -65,47 +60,15 @@ class PVC extends Component {
         },
       },
       {
-        title: "Status",
-        dataIndex: ["status", "phase"],
+        title: "Pods",
+        dataIndex: ["status"],
         key: uuid(),
-        render: (status) => {
-          return <Tag color={this.statusColors[status]}>{status}</Tag>;
+        render: (statusObject) => {
+          let readyPods = statusObject["readyReplicas"] || 0;
+          let totalPods = statusObject["replicas"] || null;
+
+          return `${readyPods} / ${totalPods}`;
         },
-      },
-      {
-        title: "Volume",
-        dataIndex: ["spec", "volumeName"],
-        key: uuid(),
-      },
-      {
-        title: "Capacity",
-        dataIndex: ["spec", "resources", "requests", "storage"],
-        key: uuid(),
-      },
-      {
-        title: "Access Modes",
-        dataIndex: ["spec", "accessModes"],
-        key: uuid(),
-        render: (accessModes) => {
-          if (accessModes.length > 0) {
-            return (
-              <Collapse key={uuid()}>
-                <Collapse.Panel header="View">
-                  {accessModes.map((accessMode) => {
-                    return <Tag>{accessMode}</Tag>;
-                  })}
-                </Collapse.Panel>
-              </Collapse>
-            );
-          } else {
-            return "-";
-          }
-        },
-      },
-      {
-        title: "Storage Class",
-        dataIndex: ["spec", "storageClassName"],
-        key: uuid(),
       },
       {
         title: "Age",
@@ -125,28 +88,54 @@ class PVC extends Component {
           );
         },
       },
+      {
+        title: "Images",
+        dataIndex: ["spec", "template", "spec", "containers"],
+        key: uuid(),
+        render: (containersList) => {
+          let imageList = [];
+          containersList.forEach((container) => {
+            imageList.push(container.image);
+          });
+
+          if (imageList.length > 0) {
+            return (
+              <Collapse key={uuid()}>
+                <Collapse.Panel header="View">
+                  {imageList.map((image) => {
+                    return <Tag>{image}</Tag>;
+                  })}
+                </Collapse.Panel>
+              </Collapse>
+            );
+          } else {
+            return "-";
+          }
+        },
+      },
     ];
   }
 
   componentDidMount = () => {
-    this.context.setHeader("Persistent Volume Claims");
-    this.getPVC();
+    this.context.setHeader("Stateful Sets");
+    this.getStatefulSets();
   };
 
-  getPVC = async () => {
+  getStatefulSets = async () => {
     try {
       let serverResponse = await axios.get(
-        `/api/config/${this.context.state.namespace}/get-pvc`
+        `/api/workload/${this.context.state.namespace}/get-stateful-sets`
       );
       if (serverResponse.status === 200) {
         this.setState({
-          data: serverResponse.data.response.body.pvc,
+          data: serverResponse.data.response.body.statefulSets,
         });
       } else {
-        message.error("Error occured");
+        console.log("Error occurred");
+        message.error("Error occurred");
       }
     } catch (err) {
-      console.log("Error:", err);
+      console.log("Error: ", err);
       message.error("Error occurred");
     }
     this.setState({
@@ -155,8 +144,6 @@ class PVC extends Component {
   };
 
   render() {
-    console.log(this.state.data);
-
     return (
       <div>
         <DataTable
@@ -169,6 +156,6 @@ class PVC extends Component {
   }
 }
 
-PVC.contextType = Context;
+StatefulsetsList.contextType = Context;
 
-export default PVC;
+export default StatefulsetsList;

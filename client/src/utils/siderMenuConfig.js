@@ -110,6 +110,13 @@ let menuStructure = [
         key: "workloads-replicasets",
         path: "/replica-sets",
       },
+      {
+        type: "item",
+        name: "statefulsets",
+        stylizedName: "Stateful Sets",
+        key: "workloads-statefulsets",
+        path: "/stateful-sets",
+      },
     ],
   },
   {

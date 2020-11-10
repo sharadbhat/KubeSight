@@ -84,6 +84,12 @@
     "key": "workloads-replicasets",
     "parentKey": "workloads"
   },
+  "/workloads/stateful-sets": {
+    "name": "statefulsets",
+    "stylizedName": "Stateful Sets",
+    "key": "workloads-statefulsets",
+    "parentKey": "workloads"
+  },
 
   "/config/config-maps": {
     "name": "configmaps",
