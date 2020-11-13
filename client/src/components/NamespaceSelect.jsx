@@ -50,13 +50,22 @@ class NamespaceSelect extends Component {
       >
         <Tooltip title="Namespace" placement="right">
           <Select
+            showSearch
             style={{ margin: "15px 0px", width: 140 }}
+            optionFilterProp="children"
             onSelect={this.setNamespace}
             value={this.context.state.namespace}
+            filterOption={(input, option) =>
+              option.children?.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
           >
-            {this.state.namespaces.map((namespace, i) => {
-              return <Select.Option key={namespace}>{namespace}</Select.Option>;
-            })}
+            <Select.OptGroup label="Namespaces">
+              {this.state.namespaces.map((namespace, i) => {
+                return (
+                  <Select.Option key={namespace}>{namespace}</Select.Option>
+                );
+              })}
+            </Select.OptGroup>
           </Select>
         </Tooltip>
       </div>
