@@ -18,6 +18,10 @@ let initConn = new Promise((resolve, reject) => {
   rbacAuthorizationV1API = kc.makeApiClient(k8s.RbacAuthorizationV1Api);
   storageV1API = kc.makeApiClient(k8s.StorageV1Api);
 
+  batchV1Beta1API.readNamespacedCronJob("hello", "default").then((res) => {
+    console.log(JSON.stringify(res.response.toJSON().body, null, 4));
+  });
+
   if (coreV1API) {
     resolve();
   } else {
