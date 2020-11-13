@@ -118,13 +118,20 @@ class ReplicationcontrollersList extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Replication Controllers");
-    this.getReplicationControllers();
+    this.context.registerNamespaceCallback(
+      this.getUpdatedReplicationControllers
+    );
+    this.getReplicationControllers(this.context.state.namespace);
   };
 
-  getReplicationControllers = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getReplicationControllers = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/workload/${this.context.state.namespace}/get-replication-controllers`
+        `/api/workload/${namespace}/get-replication-controllers`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -141,6 +148,13 @@ class ReplicationcontrollersList extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedReplicationControllers = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getReplicationControllers(namespace);
   };
 
   render() {

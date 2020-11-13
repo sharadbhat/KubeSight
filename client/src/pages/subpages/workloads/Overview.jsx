@@ -62,13 +62,18 @@ class Overview extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Workloads Overview");
-    this.getOverview();
+    this.context.registerNamespaceCallback(this.getUpdatedOverview);
+    this.getOverview(this.context.state.namespace);
   };
 
-  getOverview = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getOverview = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/workload/${this.context.state.namespace}/get-overview`
+        `/api/workload/${namespace}/get-overview`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -84,6 +89,13 @@ class Overview extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedOverview = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getOverview(namespace);
   };
 
   render() {

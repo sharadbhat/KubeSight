@@ -130,14 +130,17 @@ class PVC extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Persistent Volume Claims");
-    this.getPVC();
+    this.context.registerNamespaceCallback(this.getUpdatedPVC);
+    this.getPVC(this.context.state.namespace);
   };
 
-  getPVC = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getPVC = async (namespace) => {
     try {
-      let serverResponse = await axios.get(
-        `/api/config/${this.context.state.namespace}/get-pvc`
-      );
+      let serverResponse = await axios.get(`/api/config/${namespace}/get-pvc`);
       if (serverResponse.status === 200) {
         this.setState({
           data: serverResponse.data.response.body.pvc,
@@ -154,9 +157,14 @@ class PVC extends Component {
     });
   };
 
-  render() {
-    console.log(this.state.data);
+  getUpdatedPVC = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getPVC(namespace);
+  };
 
+  render() {
     return (
       <div>
         <DataTable

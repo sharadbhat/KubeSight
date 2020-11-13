@@ -102,13 +102,18 @@ class DaemonsetsList extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Daemon Sets");
-    this.getDaemonSets();
+    this.context.registerNamespaceCallback(this.getUpdatedDaemonSets);
+    this.getDaemonSets(this.context.state.namespace);
   };
 
-  getDaemonSets = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getDaemonSets = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/workload/${this.context.state.namespace}/get-daemon-sets`
+        `/api/workload/${namespace}/get-daemon-sets`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -125,6 +130,13 @@ class DaemonsetsList extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedDaemonSets = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getDaemonSets(namespace);
   };
 
   render() {

@@ -103,13 +103,18 @@ class PodsList extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Pods");
-    this.getPods();
+    this.context.registerNamespaceCallback(this.getUpdatedPods);
+    this.getPods(this.context.state.namespace);
   };
 
-  getPods = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getPods = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/workload/${this.context.state.namespace}/get-pods`
+        `/api/workload/${namespace}/get-pods`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -126,6 +131,13 @@ class PodsList extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedPods = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getPods(namespace);
   };
 
   render() {

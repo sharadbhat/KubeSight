@@ -87,13 +87,18 @@ class Secrets extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Secrets");
-    this.getSecrets();
+    this.context.registerNamespaceCallback(this.getUpdatedSecrets);
+    this.getSecrets(this.context.state.namespace);
   };
 
-  getSecrets = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getSecrets = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/config/${this.context.state.namespace}/get-secrets`
+        `/api/config/${namespace}/get-secrets`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -109,6 +114,13 @@ class Secrets extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedSecrets = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getSecrets(namespace);
   };
 
   render() {

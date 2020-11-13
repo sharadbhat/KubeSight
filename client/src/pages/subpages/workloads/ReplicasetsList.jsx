@@ -102,13 +102,18 @@ class ReplicasetsList extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Replica Sets");
-    this.getReplicaSets();
+    this.context.registerNamespaceCallback(this.getUpdatedReplicaSets);
+    this.getReplicaSets(this.context.state.namespace);
   };
 
-  getReplicaSets = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getReplicaSets = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/workload/${this.context.state.namespace}/get-replica-sets`
+        `/api/workload/${namespace}/get-replica-sets`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -125,6 +130,13 @@ class ReplicasetsList extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedReplicaSets = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getReplicaSets(namespace);
   };
 
   render() {

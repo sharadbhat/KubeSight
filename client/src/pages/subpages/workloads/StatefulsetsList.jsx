@@ -118,13 +118,18 @@ class StatefulsetsList extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Stateful Sets");
-    this.getStatefulSets();
+    this.context.registerNamespaceCallback(this.getUpdatedStatefulSets);
+    this.getStatefulSets(this.context.state.namespace);
   };
 
-  getStatefulSets = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getStatefulSets = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/workload/${this.context.state.namespace}/get-stateful-sets`
+        `/api/workload/${namespace}/get-stateful-sets`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -141,6 +146,13 @@ class StatefulsetsList extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedStatefulSets = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getStatefulSets(namespace);
   };
 
   render() {

@@ -136,13 +136,18 @@ class JobsList extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Jobs");
-    this.getJobs();
+    this.context.registerNamespaceCallback(this.getUpdatedJobs);
+    this.getJobs(this.context.state.namespace);
   };
 
-  getJobs = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getJobs = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/workload/${this.context.state.namespace}/get-jobs`
+        `/api/workload/${namespace}/get-jobs`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -159,6 +164,13 @@ class JobsList extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedJobs = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getJobs(namespace);
   };
 
   render() {

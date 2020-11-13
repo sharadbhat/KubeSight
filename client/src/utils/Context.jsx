@@ -8,6 +8,7 @@ class Provider extends Component {
     this.state = {
       header: "",
       namespace: "default",
+      namespaceCallback: null,
     };
   }
 
@@ -21,6 +22,21 @@ class Provider extends Component {
     this.setState({
       namespace,
     });
+    if (this.state.namespaceCallback) {
+      this.state.namespaceCallback(namespace);
+    }
+  };
+
+  registerNamespaceCallback = (callback) => {
+    this.setState({
+      namespaceCallback: callback,
+    });
+  };
+
+  deregisterNamespaceCallback = () => {
+    this.setState({
+      namespaceCallback: null,
+    });
   };
 
   render() {
@@ -30,6 +46,8 @@ class Provider extends Component {
           state: this.state,
           setHeader: this.setHeader,
           setNamespace: this.setNamespace,
+          registerNamespaceCallback: this.registerNamespaceCallback,
+          deregisterNamespaceCallback: this.deregisterNamespaceCallback,
         }}
       >
         {this.props.children}

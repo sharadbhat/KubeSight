@@ -102,13 +102,18 @@ class DeploymentsList extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Deployments");
+    this.context.registerNamespaceCallback(this.getUpdatedDeployments);
     this.getDeployments();
   };
 
-  getDeployments = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getDeployments = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/workload/${this.context.state.namespace}/get-deployments`
+        `/api/workload/${namespace}/get-deployments`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -125,6 +130,13 @@ class DeploymentsList extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedDeployments = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getDeployments(namespace);
   };
 
   render() {

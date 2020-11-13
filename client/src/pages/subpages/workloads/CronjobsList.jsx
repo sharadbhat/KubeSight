@@ -132,13 +132,18 @@ class CronjobsList extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Cron Jobs");
-    this.getCronJobs();
+    this.context.registerNamespaceCallback(this.getUpdatedCronJobs);
+    this.getCronJobs(this.context.state.namespace);
   };
 
-  getCronJobs = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getCronJobs = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/workload/${this.context.state.namespace}/get-cron-jobs`
+        `/api/workload/${namespace}/get-cron-jobs`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -155,6 +160,13 @@ class CronjobsList extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedCronJobs = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getCronJobs(namespace);
   };
 
   render() {

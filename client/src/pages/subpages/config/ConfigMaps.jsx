@@ -82,13 +82,18 @@ class ConfigMaps extends Component {
 
   componentDidMount = () => {
     this.context.setHeader("Config Maps");
-    this.getConfigMaps();
+    this.context.registerNamespaceCallback(this.getUpdatedConfigMaps);
+    this.getConfigMaps(this.context.state.namespace);
   };
 
-  getConfigMaps = async () => {
+  componentWillUnmount = () => {
+    this.context.deregisterNamespaceCallback();
+  };
+
+  getConfigMaps = async (namespace) => {
     try {
       let serverResponse = await axios.get(
-        `/api/config/${this.context.state.namespace}/get-config-maps`
+        `/api/config/${namespace}/get-config-maps`
       );
       if (serverResponse.status === 200) {
         this.setState({
@@ -104,6 +109,13 @@ class ConfigMaps extends Component {
     this.setState({
       loading: false,
     });
+  };
+
+  getUpdatedConfigMaps = (namespace) => {
+    this.setState({
+      loading: true,
+    });
+    this.getConfigMaps(namespace);
   };
 
   render() {
