@@ -11,16 +11,16 @@ var router = express.Router();
 router.get("/get-cluster-roles", async function (req, res, next) {
   try {
     let k8sResponse = await rbacAuthorizationV1API.listClusterRole();
-    let roles = [];
+    let clusterRoles = [];
     k8sResponse.body.items.map((item, i) => {
-      roles.push(item);
+      clusterRoles.push(item);
     });
 
     res.status(200).json({
       response: {
         statusCode: 200,
         body: {
-          roles,
+          clusterRoles,
         },
       },
     });

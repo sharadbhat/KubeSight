@@ -59,6 +59,7 @@ class NamespaceSelect extends Component {
               option.children?.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
+            <Select.Option key={"_all_"}>All Namespaces</Select.Option>
             <Select.OptGroup label="Namespaces">
               {this.state.namespaces.map((namespace, i) => {
                 return (

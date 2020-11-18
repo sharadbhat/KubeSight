@@ -10,9 +10,14 @@ var router = express.Router();
 
 router.get("/:namespace/get-pvc", async function (req, res) {
   try {
-    let k8sResponse = await coreV1API.listNamespacedPersistentVolumeClaim(
-      req.params.namespace
-    );
+    let k8sResponse;
+    if (req.params.namespace === "_all_") {
+      k8sResponse = await coreV1API.listPersistentVolumeClaimForAllNamespaces();
+    } else {
+      k8sResponse = await coreV1API.listNamespacedPersistentVolumeClaim(
+        req.params.namespace
+      );
+    }
     let pvc = [];
     k8sResponse.body.items.map((item, i) => {
       pvc.push(item);

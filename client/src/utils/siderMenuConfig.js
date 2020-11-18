@@ -31,10 +31,10 @@ let menuStructure = [
       },
       {
         type: "item",
-        name: "roles",
-        stylizedName: "Roles",
-        key: "cluster-roles",
-        path: "/roles",
+        name: "clusterroles",
+        stylizedName: "Cluster Roles",
+        key: "cluster-clusterroles",
+        path: "/cluster-roles",
       },
       {
         type: "item",

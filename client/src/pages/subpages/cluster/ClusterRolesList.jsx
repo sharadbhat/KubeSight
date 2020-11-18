@@ -10,7 +10,7 @@ import DataTable from "../../../components/DataTable";
 // Utils
 import { Context } from "../../../utils/Context";
 
-class RolesList extends Component {
+class ClusterRolesList extends Component {
   constructor(props) {
     super(props);
 
@@ -49,7 +49,7 @@ class RolesList extends Component {
   }
 
   componentDidMount = () => {
-    this.context.setHeader("Roles");
+    this.context.setHeader("Cluster Roles");
     this.getRoles();
   };
 
@@ -58,7 +58,7 @@ class RolesList extends Component {
       let serverResponse = await axios.get("/api/cluster/get-cluster-roles");
       if (serverResponse.status === 200) {
         this.setState({
-          data: serverResponse.data.response.body.roles,
+          data: serverResponse.data.response.body.clusterRoles,
         });
       } else {
         console.log("Error occurred");
@@ -86,6 +86,6 @@ class RolesList extends Component {
   }
 }
 
-RolesList.contextType = Context;
+ClusterRolesList.contextType = Context;
 
-export default RolesList;
+export default ClusterRolesList;

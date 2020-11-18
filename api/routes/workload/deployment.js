@@ -10,9 +10,14 @@ var router = express.Router();
 
 router.get("/:namespace/get-deployments", async function (req, res, next) {
   try {
-    let k8sResponse = await appsV1API.listNamespacedDeployment(
-      req.params.namespace
-    );
+    let k8sResponse;
+    if (req.params.namespace === "_all_") {
+      k8sResponse = await appsV1API.listDeploymentForAllNamespaces();
+    } else {
+      k8sResponse = await appsV1API.listNamespacedDeployment(
+        req.params.namespace
+      );
+    }
     let deployments = [];
 
     k8sResponse.body.items.map((item, i) => {

@@ -29,10 +29,10 @@
     "key": "cluster-persistentvolumes",
     "parentKey": "cluster"
   },
-  "/cluster/roles": {
-    "name": "roles",
-    "stylizedName": "Roles",
-    "key": "cluster-roles",
+  "/cluster/cluster-roles": {
+    "name": "cluster-roles",
+    "stylizedName": "Cluster Roles",
+    "key": "cluster-clusterroles",
     "parentKey": "cluster"
   },
   "/cluster/storage-classes": {

@@ -10,9 +10,14 @@ var router = express.Router();
 
 router.get("/:namespace/get-replica-sets", async function (req, res, next) {
   try {
-    let k8sResponse = await appsV1API.listNamespacedReplicaSet(
-      req.params.namespace
-    );
+    let k8sResponse;
+    if (req.params.namespace === "_all_") {
+      k8sResponse = await appsV1API.listReplicaSetForAllNamespaces();
+    } else {
+      k8sResponse = await appsV1API.listNamespacedReplicaSet(
+        req.params.namespace
+      );
+    }
     let replicaSets = [];
 
     k8sResponse.body.items.map((item, i) => {

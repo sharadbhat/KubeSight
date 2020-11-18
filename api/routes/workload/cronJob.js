@@ -10,9 +10,14 @@ var router = express.Router();
 
 router.get("/:namespace/get-cron-jobs", async function (req, res, next) {
   try {
-    let k8sResponse = await batchV1Beta1API.listNamespacedCronJob(
-      req.params.namespace
-    );
+    let k8sResponse;
+    if (req.params.namespace === "_all_") {
+      k8sResponse = await batchV1Beta1API.listCronJobForAllNamespaces();
+    } else {
+      k8sResponse = await batchV1Beta1API.listNamespacedCronJob(
+        req.params.namespace
+      );
+    }
     let cronJobs = [];
 
     k8sResponse.body.items.map((item, i) => {

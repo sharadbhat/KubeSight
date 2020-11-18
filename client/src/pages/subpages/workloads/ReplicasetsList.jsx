@@ -28,6 +28,11 @@ class ReplicasetsList extends Component {
         sortDirections: ["descend", "ascend"],
       },
       {
+        title: "Namespace",
+        dataIndex: ["metadata", "namespace"],
+        key: uuid(),
+      },
+      {
         title: "Labels",
         dataIndex: ["metadata", "labels"],
         key: uuid(),

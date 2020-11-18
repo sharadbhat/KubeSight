@@ -10,9 +10,12 @@ var router = express.Router();
 
 router.get("/:namespace/get-secrets", async function (req, res) {
   try {
-    let k8sResponse = await coreV1API.listNamespacedSecret(
-      req.params.namespace
-    );
+    let k8sResponse;
+    if (req.params.namespace === "_all_") {
+      k8sResponse = await coreV1API.listSecretForAllNamespaces();
+    } else {
+      k8sResponse = await coreV1API.listNamespacedSecret(req.params.namespace);
+    }
     let secrets = [];
     k8sResponse.body.items.map((item, i) => {
       secrets.push(item);

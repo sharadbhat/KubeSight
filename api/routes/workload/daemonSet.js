@@ -10,9 +10,14 @@ var router = express.Router();
 
 router.get("/:namespace/get-daemon-sets", async function (req, res, next) {
   try {
-    let k8sResponse = await appsV1API.listNamespacedDaemonSet(
-      req.params.namespace
-    );
+    let k8sResponse;
+    if (req.params.namespace === "_all_") {
+      k8sResponse = await appsV1API.listDaemonSetForAllNamespaces();
+    } else {
+      k8sResponse = await appsV1API.listNamespacedDaemonSet(
+        req.params.namespace
+      );
+    }
     let daemonSets = [];
 
     k8sResponse.body.items.map((item, i) => {

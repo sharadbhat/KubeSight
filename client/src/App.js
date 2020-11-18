@@ -31,9 +31,15 @@ class App extends Component {
       <Provider>
         <Layout style={{ height: "100vh" }}>
           <Router>
-            <Sider width={"14vw"}>
+            <Sider
+              width={"14vw"}
+              className="sidermenu"
+              style={{ overflow: "auto" }}
+            >
               <div className="logo" />
-              <SiderMenu location={this.props.location} />
+              <div>
+                <SiderMenu location={this.props.location} />
+              </div>
             </Sider>
             <Layout className="site-layout">
               <Content style={{ margin: "15px" }}>

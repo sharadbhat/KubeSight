@@ -10,7 +10,12 @@ var router = express.Router();
 
 router.get("/:namespace/get-pods", async function (req, res, next) {
   try {
-    let k8sResponse = await coreV1API.listNamespacedPod(req.params.namespace);
+    let k8sResponse;
+    if (req.params.namespace === "_all_") {
+      k8sResponse = await coreV1API.listPodForAllNamespaces();
+    } else {
+      k8sResponse = await coreV1API.listNamespacedPod(req.params.namespace);
+    }
     let pods = [];
 
     k8sResponse.body.items.map((item, i) => {

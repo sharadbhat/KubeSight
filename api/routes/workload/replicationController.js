@@ -14,9 +14,14 @@ router.get("/:namespace/get-replication-controllers", async function (
   next
 ) {
   try {
-    let k8sResponse = await coreV1API.listNamespacedReplicationController(
-      req.params.namespace
-    );
+    let k8sResponse;
+    if (req.params.namespace === "_all_") {
+      k8sResponse = await coreV1API.listReplicationControllerForAllNamespaces();
+    } else {
+      k8sResponse = await coreV1API.listNamespacedReplicationController(
+        req.params.namespace
+      );
+    }
     let replicationControllers = [];
 
     k8sResponse.body.items.map((item, i) => {

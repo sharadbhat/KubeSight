@@ -28,6 +28,11 @@ class DeploymentsList extends Component {
         sortDirections: ["descend", "ascend"],
       },
       {
+        title: "Namespace",
+        dataIndex: ["metadata", "namespace"],
+        key: uuid(),
+      },
+      {
         title: "Labels",
         dataIndex: ["metadata", "labels"],
         key: uuid(),
@@ -103,7 +108,7 @@ class DeploymentsList extends Component {
   componentDidMount = () => {
     this.context.setHeader("Deployments");
     this.context.registerNamespaceCallback(this.getUpdatedDeployments);
-    this.getDeployments();
+    this.getDeployments(this.context.state.namespace);
   };
 
   componentWillUnmount = () => {

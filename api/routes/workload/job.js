@@ -10,7 +10,12 @@ var router = express.Router();
 
 router.get("/:namespace/get-jobs", async function (req, res, next) {
   try {
-    let k8sResponse = await batchV1API.listNamespacedJob(req.params.namespace);
+    let k8sResponse;
+    if (req.params.namespace === "_all_") {
+      k8sResponse = await batchV1API.listJobForAllNamespaces();
+    } else {
+      k8sResponse = await batchV1API.listNamespacedJob(req.params.namespace);
+    }
     let jobs = [];
 
     k8sResponse.body.items.map((item, i) => {

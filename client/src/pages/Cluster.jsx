@@ -1,7 +1,7 @@
 import NamespacesList from "./subpages/cluster/NamespacesList";
 import NodesList from "./subpages/cluster/NodesList";
 import PersistentVolumesList from "./subpages/cluster/PersistentVolumesList";
-import RolesList from "./subpages/cluster/RolesList";
+import ClusterRolesList from "./subpages/cluster/ClusterRolesList";
 import StorageClassesList from "./subpages/cluster/StorageClassesList";
 
 let routes = [
@@ -24,10 +24,10 @@ let routes = [
     component: PersistentVolumesList,
   },
   {
-    key: "cluster-roles",
-    path: "/cluster/roles",
+    key: "cluster-clusterroles",
+    path: "/cluster/cluster-roles",
     exact: true,
-    component: RolesList,
+    component: ClusterRolesList,
   },
   {
     key: "cluster-storageclasses",
