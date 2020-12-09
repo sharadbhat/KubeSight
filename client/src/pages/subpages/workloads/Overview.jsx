@@ -100,7 +100,11 @@ class Overview extends Component {
 
   render() {
     if (this.state.loading) {
-      return <Spin />;
+      return (
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <Spin />
+        </div>
+      );
     } else {
       return (
         <div
@@ -108,6 +112,7 @@ class Overview extends Component {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-around",
+            flexWrap: "wrap",
           }}
         >
           {this.state.data.cronJobs.total > 0 && (

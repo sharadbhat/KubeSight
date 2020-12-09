@@ -8,7 +8,13 @@ async function cronJobStats(namespace) {
   let pausedCronJobs = 0;
   let totalCronJobs = 0;
 
-  let cronJobsResponse = await batchV1Beta1API.listNamespacedCronJob(namespace);
+  let cronJobsResponse;
+
+  if (namespace === "_all_") {
+    cronJobsResponse = await batchV1Beta1API.listCronJobForAllNamespaces();
+  } else {
+    cronJobsResponse = await batchV1Beta1API.listNamespacedCronJob(namespace);
+  }
 
   cronJobsResponse.body.items.forEach((cronJob) => {
     if (cronJob.spec.suspend) {
@@ -31,7 +37,13 @@ async function daemonSetStats(namespace) {
   let readyDaemonSets = 0;
   let totalDaemonSets = 0;
 
-  let daemonSetsResponse = await appsV1API.listNamespacedDaemonSet(namespace);
+  let daemonSetsResponse;
+
+  if (namespace === "_all_") {
+    daemonSetsResponse = await appsV1API.listDaemonSetForAllNamespaces();
+  } else {
+    daemonSetsResponse = await appsV1API.listNamespacedDaemonSet(namespace);
+  }
   daemonSetsResponse.body.items.forEach((item) => {
     totalDaemonSets += 1;
     if (item.status.numberUnavailable > 0) {
@@ -52,7 +64,14 @@ async function deploymentStats(namespace) {
   let pendingDeployments = 0;
   let totalDeployments = 0;
 
-  let deploymentsResponse = await appsV1API.listNamespacedDeployment(namespace);
+  let deploymentsResponse;
+
+  if (namespace === "_all_") {
+    deploymentsResponse = await appsV1API.listDeploymentForAllNamespaces();
+  } else {
+    deploymentsResponse = await appsV1API.listNamespacedDeployment(namespace);
+  }
+
   deploymentsResponse.body.items.forEach((item) => {
     if (item.status.unavailableReplicas > 0) {
       pendingDeployments += 1;
@@ -74,7 +93,13 @@ async function jobStats(namespace) {
   let failedJobs = 0;
   let totalJobs = 0;
 
-  let jobsResponse = await batchV1API.listNamespacedJob(namespace);
+  let jobsResponse;
+
+  if (namespace === "_all_") {
+    jobsResponse = await batchV1API.listJobForAllNamespaces();
+  } else {
+    jobsResponse = await batchV1API.listNamespacedJob(namespace);
+  }
 
   jobsResponse.body.items.forEach((job) => {
     if (job.status.active > 0) {
@@ -102,7 +127,13 @@ async function podStats(namespace) {
   let failedPods = 0;
   let totalPods = 0;
 
-  let podsResponse = await coreV1API.listNamespacedPod(namespace);
+  let podsResponse;
+
+  if (namespace === "_all_") {
+    podsResponse = await coreV1API.listPodForAllNamespaces();
+  } else {
+    podsResponse = await coreV1API.listNamespacedPod(namespace);
+  }
 
   podsResponse.body.items.forEach((pod) => {
     totalPods += 1;
@@ -138,7 +169,13 @@ async function replicaSetStats(namespace) {
   let pendingReplicaSets = 0;
   let totalReplicaSets = 0;
 
-  let replicaSetsResponse = await appsV1API.listNamespacedReplicaSet(namespace);
+  let replicaSetsResponse;
+
+  if (namespace === "_all_") {
+    replicaSetsResponse = await appsV1API.listReplicaSetForAllNamespaces();
+  } else {
+    replicaSetsResponse = await appsV1API.listNamespacedReplicaSet(namespace);
+  }
 
   replicaSetsResponse.body.items.forEach((item) => {
     totalReplicaSets += 1;
@@ -161,9 +198,15 @@ async function replicationControllerStats(namespace) {
   let readyReplicationControllers = 0;
   let totalReplicationControllers = 0;
 
-  let statefulSetsResponse = await coreV1API.listNamespacedReplicationController(
-    namespace
-  );
+  let statefulSetsResponse;
+
+  if (namespace === "_all_") {
+    statefulSetsResponse = await coreV1API.listReplicationControllerForAllNamespaces();
+  } else {
+    statefulSetsResponse = await coreV1API.listNamespacedReplicationController(
+      namespace
+    );
+  }
 
   statefulSetsResponse.body.items.forEach((item) => {
     totalReplicationControllers += 1;
@@ -186,9 +229,13 @@ async function statefulSetStats(namespace) {
   let readyStatefulSets = 0;
   let totalStatefulSets = 0;
 
-  let statefulSetsResponse = await appsV1API.listNamespacedStatefulSet(
-    namespace
-  );
+  let statefulSetsResponse;
+
+  if (namespace === "_all_") {
+    statefulSetsResponse = await appsV1API.listStatefulSetForAllNamespaces();
+  } else {
+    statefulSetsResponse = await appsV1API.listNamespacedStatefulSet(namespace);
+  }
 
   statefulSetsResponse.body.items.forEach((item) => {
     totalStatefulSets += 1;
