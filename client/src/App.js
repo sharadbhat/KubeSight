@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
 
 // Pages
+import Home from "./pages/Home";
 import Cluster from "./pages/Cluster";
 import Workloads from "./pages/Workloads";
 import Config from "./pages/Config";
@@ -36,7 +37,11 @@ class App extends Component {
               className="sidermenu"
               style={{ overflow: "auto" }}
             >
-              <div className="logo" />
+              <div className="logo">
+                <Link to="/">
+                  <h2 style={{ color: "white", fontWeight: 600 }}>KubeSight</h2>
+                </Link>
+              </div>
               <div>
                 <SiderMenu location={this.props.location} />
               </div>
@@ -46,6 +51,7 @@ class App extends Component {
                 <div className="site-layout-background">
                   <Header />
                   <Switch>
+                    <Route path="/" exact component={Home} />
                     {Cluster.map((props) => (
                       <Route {...props} />
                     ))}
