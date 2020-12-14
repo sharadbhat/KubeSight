@@ -13,7 +13,7 @@ class DataTable extends Component {
           columns={this.props.columns}
           dataSource={this.props.data}
           bordered
-          rowKey={uuid()}
+          rowKey={() => uuid()}
           pagination={
             this.props.data.length < 11 ? false : { position: ["bottomCenter"] }
           }
