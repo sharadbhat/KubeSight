@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { message, Tag, Tooltip, Collapse } from "antd";
+import { message, Tag, Tooltip, Collapse, Button, Popconfirm } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
 import cronstrue from "cronstrue";
+
+import {
+  DeleteOutlined,
+} from '@ant-design/icons';
 
 // Components
 import DataTable from "../../../components/DataTable";
@@ -127,6 +131,20 @@ class CronjobsList extends Component {
           );
         },
       },
+      {
+        title: "Actions",
+        key: uuid(),
+        align: "center",
+        render: (row) => {
+          return (
+            <Popconfirm title="Delete resource?" onConfirm={() => this.deleteResource(row)}>
+              <Button danger type="primary" style={{ width: 100 }}>
+                <DeleteOutlined /> Delete
+              </Button>
+            </Popconfirm>
+          )
+        }
+      },
     ];
   }
 
@@ -168,6 +186,23 @@ class CronjobsList extends Component {
     });
     this.getCronJobs(namespace);
   };
+
+  deleteResource = async row => {
+    try {
+      let serverResponse = await axios.delete(
+        `/api/workload/${row.metadata.namespace}/delete-cron-job?name=${row.metadata.name}`
+      )
+      if (serverResponse.status === 200) {
+        let data = [...this.state.data]
+        this.setState({ data: data.filter(item => item.metadata.name !== row.metadata.name) })
+        message.success("Resource deleted")
+      } else {
+        message.error("Error occurred");
+      }
+    } catch (err) {
+      console.log("Error:", err);
+    }
+  }
 
   render() {
     return (
