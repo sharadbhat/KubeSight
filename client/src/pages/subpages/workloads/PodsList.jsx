@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { message, Tag, Tooltip, Collapse } from "antd";
+import { message, Tag, Tooltip, Collapse, Button, Popconfirm } from "antd";
 import axios from "axios";
 import moment from "moment";
 import { v4 as uuid } from "uuid";
@@ -9,6 +9,10 @@ import DataTable from "../../../components/DataTable";
 
 // Utils
 import { Context } from "../../../utils/Context";
+
+import {
+  DeleteOutlined,
+} from '@ant-design/icons';
 
 class PodsList extends Component {
   constructor(props) {
@@ -98,6 +102,20 @@ class PodsList extends Component {
           );
         },
       },
+      {
+        title: "Actions",
+        key: uuid(),
+        align: "center",
+        render: (row) => {
+          return (
+            <Popconfirm title="Delete resource?" onConfirm={() => this.deleteResource(row)}>
+              <Button danger type="primary" style={{ width: 100 }}>
+                <DeleteOutlined /> Delete
+              </Button>
+            </Popconfirm>
+          )
+        }
+      },
     ];
   }
 
@@ -139,6 +157,23 @@ class PodsList extends Component {
     });
     this.getPods(namespace);
   };
+
+  deleteResource = async row => {
+    try {
+      let serverResponse = await axios.delete(
+        `/api/workload/${row.metadata.namespace}/delete-pod?name=${row.metadata.name}`
+      )
+      if (serverResponse.status === 200) {
+        let data = [...this.state.data]
+        this.setState({ data: data.filter(item => item.metadata.name !== row.metadata.name) })
+        message.success("Resource deleted")
+      } else {
+        message.error("Error occurred");
+      }
+    } catch (err) {
+      console.log("Error:", err);
+    }
+  }
 
   render() {
     return (

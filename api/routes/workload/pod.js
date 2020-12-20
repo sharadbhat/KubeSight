@@ -91,4 +91,35 @@ router.get(
   }
 );
 
+router.delete(
+  "/:namespace/delete-pod",
+  checkSchema({
+    name: {
+      in: ["query"],
+      isString: true,
+    },
+  }),
+  async function (req, res) {
+  try {
+    await coreV1API.deleteNamespacedPod(
+      req.query.name,
+      req.params.namespace
+    );
+    res.status(200).json({
+      response: {
+        statusCode: 200
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      response: {
+        statusCode: 500,
+        body: {
+          errorMessages: ["Internal Server Error"],
+        },
+      },
+    });
+  }
+})
+
 module.exports = router;
